@@ -53,6 +53,23 @@ app.get("/carros", (req, res) => {
    }
    res.json(result)
 });
- 
-       
+
+});
+
+app.delete('/carros/:id', (req, res) => {
+
+    const id = req.params.id;
+
+    db.query('DELETE FROM carros WHERE id = ?', [id], (err) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send('Deletado');
+        }
+    });
+
+});
+
+app.listen(3000, () => {
+    console.log('Servidor rodando na porta 3000');
 });
